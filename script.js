@@ -29,10 +29,20 @@ function updateDisplay(verse) {
   verse = verse.toLowerCase();
   const url = verse + ".txt";
 
-  fetch(url).then(function (response) {
-    response.text().then(function (text) {
-      poemDisplay.textContent = text;
-    });
+  // * fetch - promise - возвращает промис при получении ответа от сервера 
+  // * -> метод .text - promise - берет необраб данные с сервера и возвращает промис, когда преобраз данные в текст 
+  // * -> далее функция принимает данные и меняет текстоввое содержимое poemDisplay 
+  // fetch(url).then(function (response) {
+  //   response.text().then(function (text) {
+  //     poemDisplay.textContent = text;
+  //   });
+  // });
+
+  // * можно записать в последовательном варианте, без вложенности
+  fetch(url).then(function(response){
+    return response.text()
+  }).then(function(text) {
+    poemDisplay.textContent = text;
   });
 }
 
