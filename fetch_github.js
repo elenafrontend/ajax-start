@@ -1,14 +1,11 @@
+fetch('./user.json')
+  .then(responce => responce.json())
+  .then(user => fetch(`https://api.github.com/users/${user.name}`))
+  .then(responce => responce.json())
+  .then(githubUser => {
+    let img = document.createElement('img')
+    img.src = githubUser.avatar_url
+    document.body.append(img)
 
-// Код ниже запрашивает файл test.json и загружает его содержимое с сервера
-fetch('./test.json')
-  // .then в коде ниже выполняется, когда удалённый сервер отвечает
-  .then(function(responce) {
-    // response.text() или response.json() возвращает новый промис,
-    // который выполняется и возвращает полный ответ сервера в тестовом формате/json,
-    // когда он загрузится
-    return responce.json()
-  })
-  .then(function(post) {
-    // содержимое полученного файла выводится на экран
-    alert(post[0].title)
+    setTimeout(() => img.remove(), 2000)
   })
